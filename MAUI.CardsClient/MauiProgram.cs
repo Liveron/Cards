@@ -18,6 +18,8 @@ namespace MAUI.CardsClient
 
             builder.AddPages();
             builder.AddViewModels();
+            builder.AddServices();
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif

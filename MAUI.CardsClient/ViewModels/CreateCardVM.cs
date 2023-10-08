@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MAUI.CardsClient.Models;
+using MAUI.CardsClient.Services.Interfaces;
 using System.Text.Json;
 
 namespace MAUI.CardsClient.ViewModels
@@ -13,32 +14,28 @@ namespace MAUI.CardsClient.ViewModels
         [ObservableProperty]
         string _title;
 
-        [RelayCommand]
-        async Task SaveCard()
+        ICardsFileSystemService _cardsFileSystemService;
+
+        public CreateCardVM(ICardsFileSystemService cardsRepository)
         {
-            Description = FileSystem.AppDataDirectory;
-
-                using (FileStream fs = new(Path.Combine(FileSystem.AppDataDirectory, "Test.json"), FileMode.OpenOrCreate))
-                {
-                    await JsonSerializer.SerializeAsync(fs, new Card
-                    {
-                        Title = "Hi",
-                        Details = "Test",
-                    });
-                };    
-
+            _cardsFileSystemService = cardsRepository;
         }
 
-        void CreateDirectory()
+        [RelayCommand]
+        async Task SaveCardAsync()
         {
-            try
+            var testCard = new Card
             {
-                Directory.CreateDirectory(Path.Combine(FileSystem.Current.AppDataDirectory, "cardsInfo"));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+                Details = "I'm test card",
+                Title = "I'm test title",
+            };
+
+            //await _cardsFileSystemService.CreateAsync(testCard);
+
+            var cards = await _cardsFileSystemService.GetAllAsync();
+
+            Title = cards.ToList().First().Title;
+            Title = cards.ToList().First().Details;
         }
     }
 }
