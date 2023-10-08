@@ -1,0 +1,18 @@
+﻿.card-container {
+    height: 650;
+}
+
+.card {
+    margin: 20 20;
+}
+
+.card--label {
+    background-color: aqua; 
+    text-align: center;
+    margin: 0 0 20 0;
+}
+
+.cards-button {
+    height: 100;
+    width:100;
+}

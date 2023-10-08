@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.CardsClient.MainPage">
+    <ContentPage.Resources>
+        <StyleSheet Source="../Resources/Styles/main-page.css"/>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+        <CarouselView
+            StyleClass="card-container"
+            ItemsSource="{Binding Cards}"
+            CurrentItemChangedCommand="{Binding SwipeCommand}">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Frame StyleClass="card">
+                        <VerticalStackLayout StyleClass="card--content-container">
+                            
+                            <Label
+                                StyleClass="card--label"
+                                Text="{Binding Title}"/>
+                            
+                            <Label  
+                                StyleClass="card--label"
+                                Text="{Binding Details}"/>
+                            
+                            <Frame StyleClass="card--image">
+                                <ImageButton />
+                            </Frame>
+                            
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <Frame WidthRequest="75" HeightRequest="75">
+            <ImageButton 
+                Source="cards.svg"
+                Command="{Binding GoToCardsPageCommand}" />
+        </Frame>
+
+    </VerticalStackLayout>
+
+</ContentPage>
