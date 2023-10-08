@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.CardsClient.Pages.CreateCardPage"
+             Title="CreateCardPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../Resources/Styles/CardsAppStyles/create-cards.xaml" />
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+
+        <Frame Style="{StaticResource CardCreationFrame}">
+
+            <VerticalStackLayout>
+                <Label 
+                    Text="Заголовок" 
+                    HorizontalOptions="Center" />
+
+                <Entry
+                    Placeholder="Введите заголовок"/>
+
+                <Label
+                    Text="{Binding Description}"
+                    HorizontalOptions="Center" />
+
+                <Editor
+                    x:Name="descriptionEditor"
+                    Style="{StaticResource CardCreationDescription}" 
+                    Text="{Binding Description}"/>
+
+                <Frame>
+
+                </Frame>
+
+
+                <Frame>
+                    <ImageButton 
+                        Command="{Binding SaveCardCommand}"/>
+                </Frame>
+                
+            </VerticalStackLayout>
+        </Frame>
+
+    </VerticalStackLayout>
+    
+</ContentPage>

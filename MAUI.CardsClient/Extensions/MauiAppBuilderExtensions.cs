@@ -9,7 +9,8 @@ namespace MAUI.CardsClient.Extentions
         {
             builder.Services
                 .AddSingleton<MainPageVM>()
-                .AddSingleton<CardsPageVM>();
+                .AddSingleton<CardsPageVM>()
+                .AddSingleton<CreateCardVM>();
 
             return builder;
         }
@@ -17,8 +18,9 @@ namespace MAUI.CardsClient.Extentions
         public static MauiAppBuilder AddPages(this MauiAppBuilder builder)
         {
             builder.Services
-                .AddSingleton<MainPage>()
-                .AddSingleton<CardsPage>();
+                .AddTransient<MainPage>()
+                .AddTransient<CardsPage>()
+                .AddTransient<CreateCardPage>();
 
             return builder;
         }

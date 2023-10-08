@@ -3,28 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI.CardsClient.MainPage">
     <ContentPage.Resources>
-        <StyleSheet Source="../Resources/Styles/main-page.css"/>
+        <ResourceDictionary Source="../Resources/Styles/CardsAppStyles/main-page.xaml"/>
     </ContentPage.Resources>
 
     <VerticalStackLayout>
         <CarouselView
-            StyleClass="card-container"
+            Style="{StaticResource card-container}"
             ItemsSource="{Binding Cards}"
             CurrentItemChangedCommand="{Binding SwipeCommand}">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Frame StyleClass="card">
-                        <VerticalStackLayout StyleClass="card--content-container">
+                    <Frame Style="{StaticResource card}">
+                        <VerticalStackLayout>
                             
                             <Label
-                                StyleClass="card--label"
+                                Style="{StaticResource card-label}"
                                 Text="{Binding Title}"/>
                             
                             <Label  
-                                StyleClass="card--label"
+                                Style="{StaticResource card-label}"
                                 Text="{Binding Details}"/>
                             
-                            <Frame StyleClass="card--image">
+                            <Frame>
                                 <ImageButton />
                             </Frame>
                             
@@ -34,7 +34,8 @@
             </CarouselView.ItemTemplate>
         </CarouselView>
 
-        <Frame WidthRequest="75" HeightRequest="75">
+        <Frame 
+            Style="{StaticResource cards-button}">
             <ImageButton 
                 Source="cards.svg"
                 Command="{Binding GoToCardsPageCommand}" />

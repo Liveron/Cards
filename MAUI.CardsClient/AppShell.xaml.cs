@@ -15,6 +15,7 @@ namespace MAUI.CardsClient
         {
             Routing.RegisterRoute(nameof(CardsPage), typeof(CardsPage));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(CreateCardPage), typeof(CreateCardPage));
         }
     }
 }
