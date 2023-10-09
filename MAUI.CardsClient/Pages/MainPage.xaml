@@ -10,7 +10,7 @@
         <CarouselView
             Style="{StaticResource card-container}"
             ItemsSource="{Binding Cards}"
-            CurrentItemChangedCommand="{Binding SwipeCommand}">
+            CurrentItemChangedCommand="{Binding SwipedCommand}">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <Frame Style="{StaticResource card}">
@@ -22,7 +22,7 @@
                             
                             <Label  
                                 Style="{StaticResource card-label}"
-                                Text="{Binding Details}"/>
+                                Text="{Binding Description}"/>
                             
                             <Frame>
                                 <ImageButton />

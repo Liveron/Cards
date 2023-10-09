@@ -1,59 +1,80 @@
 ﻿using MAUI.CardsClient.Models;
 using MAUI.CardsClient.Services.Interfaces;
+using MAUI.CardsClient.Utils;
 using System.Text.Json;
 
 namespace MAUI.CardsClient.Services
 {
-    public class CardsFileSystemService : ICardsFileSystemService
+    public class CardsFileSystemService : AFileSystemRepository<Card>
     {
-        const string CARDS_INFO_FILE = "cardsInfo.json";
-        
-        public IEnumerable<Card> GetAll()
-        {
-            string pathToRead = Path.Combine(FileSystem.Current.AppDataDirectory, CARDS_INFO_FILE);
+        const string CARDS_INFO_FILE = "infoFile.json";
 
-            IEnumerable<Card> cards;
+        string _path = Path.Combine(FileSystem.AppDataDirectory, CARDS_INFO_FILE);
 
-            string jsonCards = File.ReadAllText(pathToRead);
+        FileStream _fileStream;
+        FileStream fileStream 
+        {   
+            get => _fileStream ??= 
+                new FileStream(_path, FileMode.OpenOrCreate, FileAccess.ReadWrite); 
 
-            cards = JsonSerializer.Deserialize<IEnumerable<Card>>(jsonCards);
-
-            return cards;
+            set => _fileStream = value; 
         }
 
-        public Card Get(int id)
+        public CardsFileSystemService()
+        {
+
+        }
+
+        public override void Create(Card entity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task CreateAsync(Card card)
+        public override async Task CreateAsync(Card card)
         {
-            await Task.Run(() => Create(card));
+            IEnumerable<Card> cards = await GetAllAsync();
+
+            cards.ToList().Add(card);
+
+            await JsonSerializerHelper.
+                TrySerializeAsync(fileStream, cards);
         }
 
-        public void Create(Card card)
-        {
-            string jsonCard = JsonSerializer.Serialize(card);
-
-            using (var sw = new StreamWriter(File.OpenWrite(Path.Combine(FileSystem.Current.AppDataDirectory, CARDS_INFO_FILE))))
-            {
-                sw.Write(jsonCard);
-            }
-        }
-
-        public void Update(Card entity)
+        public override void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public override Card Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Card>> GetAllAsync()
+        public override IEnumerable<Card> GetAll()
         {
-            return await Task.Run(GetAll);
+            return JsonSerializerHelper.
+                TryDeserialize<IEnumerable<Card>>(fileStream);
+        }
+
+        public override async Task<IEnumerable<Card>> GetAllAsync()
+        {
+            return await JsonSerializerHelper.
+                TryDeserializeAsync<IEnumerable<Card>>(fileStream);
+        }
+
+        public override void Update(Card entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Disposing()
+        {
+            fileStream.Dispose();
+        }
+
+        protected override async ValueTask DisposingAsync()
+        {
+            await fileStream.DisposeAsync();
         }
     }
 }

@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using MAUI.CardsClient.Models;
 using MAUI.CardsClient.Services.Interfaces;
-using System.Text.Json;
 
 namespace MAUI.CardsClient.ViewModels
 {
@@ -14,11 +13,11 @@ namespace MAUI.CardsClient.ViewModels
         [ObservableProperty]
         string _title;
 
-        ICardsFileSystemService _cardsFileSystemService;
+        AFileSystemRepository<Card> _cardsFileSystemRepository;
 
-        public CreateCardVM(ICardsFileSystemService cardsRepository)
+        public CreateCardVM(AFileSystemRepository<Card> cardsRepository)
         {
-            _cardsFileSystemService = cardsRepository;
+            _cardsFileSystemRepository = cardsRepository;
         }
 
         [RelayCommand]
@@ -26,16 +25,16 @@ namespace MAUI.CardsClient.ViewModels
         {
             var testCard = new Card
             {
-                Details = "I'm test card",
+                Description = "I'm test card",
                 Title = "I'm test title",
             };
 
             //await _cardsFileSystemService.CreateAsync(testCard);
 
-            var cards = await _cardsFileSystemService.GetAllAsync();
+            var cards = await _cardsFileSystemRepository.GetAllAsync();
 
             Title = cards.ToList().First().Title;
-            Title = cards.ToList().First().Details;
+            Description = cards.ToList().First().Description;
         }
     }
 }

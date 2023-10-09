@@ -4,7 +4,7 @@ using MAUI.CardsClient.Services;
 using MAUI.CardsClient.Services.Interfaces;
 using MAUI.CardsClient.ViewModels;
 
-namespace MAUI.CardsClient.Extentions
+namespace MAUI.CardsClient.Utils.Extensions
 {
     public static class MauiAppBuilderExtensions
     {
@@ -31,8 +31,8 @@ namespace MAUI.CardsClient.Extentions
         public static MauiAppBuilder AddServices(this MauiAppBuilder builder)
         {
             builder.Services
-                .AddSingleton<ICardsFileSystemService, CardsFileSystemService>();
-            
+                .AddTransient<AFileSystemRepository<Card>, CardsFileSystemService>();
+
             return builder;
         }
     }

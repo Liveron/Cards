@@ -1,4 +1,4 @@
-﻿using MAUI.CardsClient.Extentions;
+﻿using MAUI.CardsClient.Utils.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace MAUI.CardsClient
