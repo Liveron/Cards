@@ -2,7 +2,8 @@
 
 namespace MAUI.CardsClient.Services.Interfaces
 {
-    public abstract class AFileSystemRepository<T> : IAsyncRepository<T>, IRepository<T>, IDisposable, IAsyncDisposable where T : class
+    public abstract class AFileSystemRepository<T> : 
+        IAsyncRepository<T>, IRepository<T>, IDisposable, IAsyncDisposable where T : class
     {
         private bool disposedValue;
 

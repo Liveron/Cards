@@ -5,76 +5,59 @@ namespace MAUI.CardsClient.Utils
 {
     public static class JsonSerializerHelper
     {
-        public static T TryDeserialize<T>
+        public static T? TryDeserialize<T>
             (Stream stream)
         {
             try
             {
-                return JsonSerializer.Deserialize<T>(stream);
+                var result = JsonSerializer.Deserialize<T>(stream);
+                return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return default;
             }
-            finally
-            {
-                if (stream is FileStream fileStream)
-                    fileStream.Normalize();
-            }
         }
 
-        public static async Task<T> TryDeserializeAsync<T>
+        public static async Task<T?> TryDeserializeAsync<T>
             (Stream stream)
         {
             try
             {
-                return await JsonSerializer.DeserializeAsync<T>(stream);
+                var result = await JsonSerializer.DeserializeAsync<T>(stream);
+                return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return default;
             }
-            finally
-            {
-                if (stream is FileStream fileStream)
-                    await fileStream.NormalizeAsync();
-            }
         }
 
-        public static void TrySerialize<T>
+        public static bool TrySerialize<T>
             (Stream stream, T entity)
         {
             try
             {
                 JsonSerializer.Serialize(stream, entity);
+                return true;
             }
             catch (Exception)
             {
-
-                throw;
-            }
-            finally
-            {
-                if (stream is FileStream fileStream)
-                    fileStream.Normalize();
+                return false;
             }
         }
 
-        public static async Task TrySerializeAsync<T>
+        public static async Task<bool> TrySerializeAsync<T>
             (Stream stream, T entity)
         {
             try
             {
                 await JsonSerializer.SerializeAsync(stream, entity);
+                return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
-            }
-            finally
-            {
-                if (stream is FileStream fileStream)
-                    await fileStream.NormalizeAsync();
+                return false;
             }
         }
     }

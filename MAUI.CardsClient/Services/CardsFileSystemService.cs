@@ -1,7 +1,7 @@
 ﻿using MAUI.CardsClient.Models;
 using MAUI.CardsClient.Services.Interfaces;
 using MAUI.CardsClient.Utils;
-using System.Text.Json;
+using MAUI.CardsClient.Utils.Extensions;
 
 namespace MAUI.CardsClient.Services
 {
@@ -11,18 +11,13 @@ namespace MAUI.CardsClient.Services
 
         string _path = Path.Combine(FileSystem.AppDataDirectory, CARDS_INFO_FILE);
 
-        FileStream _fileStream;
+        FileStream? _fileStream = default;
         FileStream fileStream 
         {   
             get => _fileStream ??= 
                 new FileStream(_path, FileMode.OpenOrCreate, FileAccess.ReadWrite); 
 
             set => _fileStream = value; 
-        }
-
-        public CardsFileSystemService()
-        {
-
         }
 
         public override void Create(Card entity)
@@ -34,10 +29,14 @@ namespace MAUI.CardsClient.Services
         {
             IEnumerable<Card> cards = await GetAllAsync();
 
-            cards.ToList().Add(card);
+            List<Card> cardsToWrite = cards.ToList();
+
+            cardsToWrite.Add(card);
 
             await JsonSerializerHelper.
-                TrySerializeAsync(fileStream, cards);
+                TrySerializeAsync(fileStream, cardsToWrite);
+
+            await fileStream.NormalizeAsync();
         }
 
         public override void Delete(int id)
@@ -52,14 +51,26 @@ namespace MAUI.CardsClient.Services
 
         public override IEnumerable<Card> GetAll()
         {
-            return JsonSerializerHelper.
-                TryDeserialize<IEnumerable<Card>>(fileStream);
+            IEnumerable<Card> cards = JsonSerializerHelper.
+                TryDeserialize<IEnumerable<Card>>(fileStream) ?? 
+                Enumerable.Empty<Card>();
+
+            fileStream.Normalize();
+
+            return cards;
         }
 
         public override async Task<IEnumerable<Card>> GetAllAsync()
         {
-            return await JsonSerializerHelper.
-                TryDeserializeAsync<IEnumerable<Card>>(fileStream);
+            bool isdf = File.Exists(_path);
+
+            IEnumerable<Card> cards = await JsonSerializerHelper.
+                TryDeserializeAsync<IEnumerable<Card>>(fileStream) ??
+                Enumerable.Empty<Card>();
+
+            await fileStream.NormalizeAsync();
+
+            return cards;
         }
 
         public override void Update(Card entity)

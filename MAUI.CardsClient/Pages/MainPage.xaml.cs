@@ -1,4 +1,4 @@
-﻿using MAUI.CardsClient.ViewModels;
+﻿using MAUI.CardsClient.ViewModels.MainPage;
 
 namespace MAUI.CardsClient
 {

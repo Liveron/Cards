@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="CardCreationFrame" TargetType="Frame">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="HeightRequest" Value="720"/>
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="HasShadow" Value="True"/>
+    </Style>
+
+    <Style x:Key="CardCreationDescription" TargetType="Editor">
+        <Setter Property="HeightRequest" Value="200"/>
+        <Setter Property="Placeholder" Value="Ввудите описание"/>
+    </Style>
+
+    <Style x:Key="DownloadImageBtn" TargetType="Frame">
+        <Setter Property="HeightRequest" Value="200"/>
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource LightMallow}"/>
+        <Setter Property="HasShadow" Value="True"/>
+    </Style>
+
+    <Style x:Key="text-container" TargetType="Frame">
+        <Setter Property="HasShadow" Value="True"/>
+        <Setter Property="BorderColor" Value="{StaticResource DarkPink}"/>
+        <Setter Property="CornerRadius" Value="20"/>
+        <Setter Property="Margin" Value="0, 0, 0, 20"/>
+    </Style>
+    
+</ResourceDictionary>

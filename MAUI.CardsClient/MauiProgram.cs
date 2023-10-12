@@ -1,5 +1,7 @@
-﻿using MAUI.CardsClient.Utils.Extensions;
+﻿using CommunityToolkit.Maui;
+using MAUI.CardsClient.Utils.Extensions;
 using Microsoft.Extensions.Logging;
+using MediatR;
 
 namespace MAUI.CardsClient
 {
@@ -10,6 +12,7 @@ namespace MAUI.CardsClient
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -19,6 +22,9 @@ namespace MAUI.CardsClient
             builder.AddPages();
             builder.AddViewModels();
             builder.AddServices();
+            builder.AddMediatR();
+            builder.AddMapster();
+
 
 #if DEBUG
 		builder.Logging.AddDebug();

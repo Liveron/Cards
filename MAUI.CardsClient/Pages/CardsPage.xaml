@@ -15,14 +15,22 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <CollectionView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
             
         </CollectionView>
+        <Button Command="{Binding DeleteFileCommand}"/>
 
         <Frame Grid.Column="1" Grid.Row="1">
-            <ImageButton 
-                Command="{Binding GoToCreateCardCommand}"/>
+            <ImageButton
+                Source="add_card.svg"
+                Command="{Binding GoToCreateCardPageCommand}"/>
         </Frame>       
  
     </Grid>

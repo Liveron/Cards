@@ -1,46 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MAUI.CardsClient.MainPage">
+             x:Class="MAUI.CardsClient.MainPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    
     <ContentPage.Resources>
         <ResourceDictionary Source="../Resources/Styles/CardsAppStyles/main-page.xaml"/>
     </ContentPage.Resources>
 
-    <VerticalStackLayout>
-        <CarouselView
-            Style="{StaticResource card-container}"
-            ItemsSource="{Binding Cards}"
-            CurrentItemChangedCommand="{Binding SwipedCommand}">
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Style="{StaticResource card}">
-                        <VerticalStackLayout>
-                            
-                            <Label
-                                Style="{StaticResource card-label}"
-                                Text="{Binding Title}"/>
-                            
-                            <Label  
-                                Style="{StaticResource card-label}"
-                                Text="{Binding Description}"/>
-                            
-                            <Frame>
-                                <ImageButton />
-                            </Frame>
-                            
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
+    <Grid
+        Style="{StaticResource main-page-layout}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <RefreshView
+            Padding="0"
+            Grid.Row="0"
+            Style="{StaticResource refresh-view}"
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding RefreshCommand}">
+            <CarouselView
+                ItemsSource="{Binding CardsListVM.Cards}"
+                CurrentItemChangedCommand="{Binding SwipedCommand}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame 
+                            Style="{StaticResource card}" >
+                            <VerticalStackLayout
+                                Padding="0">
+
+                                <Border
+                                    BackgroundColor="{StaticResource DarkPink}">
+                                    
+                                    <Label
+                                        Style="{StaticResource card-title-label}"
+                                        Text="{Binding Title}"/>
+                                    
+                                </Border>
+
+                                <Label 
+                                    Style="{StaticResource card-description}"
+                                    Text="{Binding Details}"/>
+
+                                <Frame>
+                                    <ImageButton />
+                                </Frame>
+
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </RefreshView>
 
         <Frame 
-            Style="{StaticResource cards-button}">
-            <ImageButton 
+            Style="{StaticResource cards-button}"
+            Grid.Row="1">
+            
+            <ImageButton
                 Source="cards.svg"
-                Command="{Binding GoToCardsPageCommand}" />
+                Command="{Binding GoToCardsPageCommand}">
+
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource BluePurple}"/>
+                </ImageButton.Behaviors>
+                
+            </ImageButton>
+
         </Frame>
 
-    </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>

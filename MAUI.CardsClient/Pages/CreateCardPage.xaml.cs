@@ -1,10 +1,10 @@
-using MAUI.CardsClient.ViewModels;
+using MAUI.CardsClient.ViewModels.CreateCardPage;
 
 namespace MAUI.CardsClient.Pages;
 
 public partial class CreateCardPage : ContentPage
 {
-	public CreateCardPage(CreateCardVM createCardVM)
+	public CreateCardPage(CreateCardPageVM createCardVM)
 	{
 		InitializeComponent();
 

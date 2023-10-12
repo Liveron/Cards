@@ -2,23 +2,42 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <Style x:Key="refresh-view" TargetType="RefreshView">
+        <Setter Property="HeightRequest" Value="600"/>
+    </Style>
+
     <Style x:Key="card-container" TargetType="CarouselView">
         <Setter Property="HeightRequest" Value="600" />
     </Style>
 
     <Style x:Key="card" TargetType="Frame">
-        <Setter Property="Margin" Value="20, 20" />
+        <Setter Property="Margin" Value="20, 20, 20, 5" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="Padding" Value="0" />
     </Style>
 
-    <Style x:Key="card-label" TargetType="Label">
-        <Setter Property="BackgroundColor" Value="Aqua" />
+    <Style x:Key="card-title-label" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0, 0, 0, 20"/>
+        <Setter Property="Margin" Value="0, 10, 0, 10"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
+
+    <Style x:Key="card-description" TargetType="Label">
+        <Setter Property="Margin" Value="20" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="20" />
     </Style>
 
     <Style x:Key="cards-button" TargetType="Frame">
-        <Setter Property="HeightRequest" Value="100"/>
-        <Setter Property="WidthRequest" Value="100" />
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Padding" Value="20, 5, 20, 30"/>
+    </Style>
+
+    <Style x:Key="main-page-layout" TargetType="VerticalStackLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource LightMallow}"/>
     </Style>
     
 </ResourceDictionary>
