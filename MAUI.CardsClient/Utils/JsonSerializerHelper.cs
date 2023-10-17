@@ -1,5 +1,4 @@
-﻿using MAUI.CardsClient.Utils.Extensions;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace MAUI.CardsClient.Utils
 {
@@ -10,8 +9,7 @@ namespace MAUI.CardsClient.Utils
         {
             try
             {
-                var result = JsonSerializer.Deserialize<T>(stream);
-                return result;
+                return JsonSerializer.Deserialize<T>(stream);
             }
             catch (Exception)
             {
@@ -24,8 +22,7 @@ namespace MAUI.CardsClient.Utils
         {
             try
             {
-                var result = await JsonSerializer.DeserializeAsync<T>(stream);
-                return result;
+                return await JsonSerializer.DeserializeAsync<T>(stream);
             }
             catch (Exception)
             {

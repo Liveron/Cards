@@ -8,12 +8,14 @@ namespace MAUI.CardsClient.Cards.Commands.CreateCard
     {
         public string Title { get; set; } = string.Empty;
         public string Details { get; set; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
 
         public void ConfigureMapping(TypeAdapterConfig config)
         {
             config.NewConfig<CardDTO, CreateCardCommandAsync>()
                 .Map(dest => dest.Title, source => source.Title)
-                .Map(dest => dest.Details, source => source.Details);
+                .Map(dest => dest.Details, source => source.Details)
+                .Map(dest => dest.ImageUrl, source => source.ImageUrl);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace MAUI.CardsClient.Cards.Commands.CreateCard
                 Id = Guid.NewGuid(),
                 Title = request.Title,
                 Details = request.Details,
+                ImageUrl = request.ImageUrl,
             };
 
             await _fileSystemRepository.CreateAsync(card);

@@ -15,6 +15,19 @@ namespace MAUI.CardsClient.ViewModels.CreateCardPage
             _cardsListVM = cardsListVM;
 
         [RelayCommand]
+        async Task PickImageAsync()
+        {
+            PickOptions pickOptions = new()
+            {
+                FileTypes = FilePickerFileType.Images,
+            };
+
+            var result = await FilePicker.Default.PickAsync(pickOptions);
+
+            CreateCardData.ImageUrl = result != null ? result.FullPath : string.Empty;
+        }
+
+        [RelayCommand]
         async Task SaveCardAndGoBackAsync()
         {
             await SaveCardAsync();

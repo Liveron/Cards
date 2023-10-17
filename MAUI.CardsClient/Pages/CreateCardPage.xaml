@@ -48,7 +48,8 @@
 
                         <ImageButton
                             Margin="20"
-                            Source="download_image.svg">
+                            Source="download_image.svg"
+                            Command="{Binding PickImageCommand}">
 
                             <ImageButton.Behaviors>
                                 <toolkit:IconTintColorBehavior TintColor="White"/>

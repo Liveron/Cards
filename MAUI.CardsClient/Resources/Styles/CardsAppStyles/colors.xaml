@@ -6,5 +6,9 @@
     <Color x:Key="LightMallow">#E3D7FF</Color>
     <Color x:Key="BlueBell">#AAA0FB</Color>
     <Color x:Key="BluePurple">#736DC2</Color>
+
+    <Color x:Key="GhostlyWhite">#F8F8FF</Color>
+    <Color x:Key="DarkBluish-Black">#464544</Color>
+    <Color x:Key="GraphiteGrey">#474A51</Color>
     
 </ResourceDictionary>

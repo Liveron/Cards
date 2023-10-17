@@ -9,65 +9,107 @@
     </ContentPage.Resources>
 
     <Grid
-        Style="{StaticResource main-page-layout}">
+        Padding="0"
+        Margin="0"
+        Style="{StaticResource main-page-layout}"
+        BackgroundColor="{StaticResource GhostlyWhite}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <RefreshView
+            Margin="0"
             Padding="0"
             Grid.Row="0"
-            Style="{StaticResource refresh-view}"
+            Grid.RowSpan="2"
             IsRefreshing="{Binding IsRefreshing}"
             Command="{Binding RefreshCommand}">
             <CarouselView
-                ItemsSource="{Binding CardsListVM.Cards}"
-                CurrentItemChangedCommand="{Binding SwipedCommand}">
+                ItemsSource="{Binding CardsListVM.Cards}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Frame 
-                            Style="{StaticResource card}" >
+                        
+                        <Frame Margin="15, 10, 15, 10"
+                               HasShadow="True"
+                               Padding="10, 5, 10, 0"
+                               CornerRadius="20">
+
                             <VerticalStackLayout
                                 Padding="0">
 
-                                <Border
-                                    BackgroundColor="{StaticResource DarkPink}">
-                                    
-                                    <Label
-                                        Style="{StaticResource card-title-label}"
-                                        Text="{Binding Title}"/>
-                                    
-                                </Border>
+                                <Label
+                                    Margin="20, 10, 20, 10"
+                                    Style="{StaticResource card-title-label}"
+                                    Text="{Binding Title}" 
+                                    TextColor="{StaticResource DarkBluish-Black}"/>
 
-                                <Label 
-                                    Style="{StaticResource card-description}"
-                                    Text="{Binding Details}"/>
+                                <FlexLayout
+                                    Margin="20, 0, 20, 0">
+                                    
+                                    <BoxView 
+                                             Color="{StaticResource GraphiteGrey}"
+                                             WidthRequest="4"
+                                             CornerRadius="10, 10, 10, 10"
+                                        Margin="0, 5, 0, 5"/>
+                                    
+                                    <Frame
+                                        BackgroundColor="{StaticResource GhostlyWhite}"
+                                        Margin="10, 5, 0, 5"
+                                        CornerRadius="10">
+                                        
+                                        <Label
+                                            Margin="0"
+                                            Style="{StaticResource card-description}"
+                                            Text="{Binding ImageUrl}"
+                                            TextColor="#464544"
+                                            FontAttributes="None"/>
+                                        
+                                    </Frame>
 
-                                <Frame>
-                                    <ImageButton />
+                                </FlexLayout>
+
+                                <Frame 
+                                    Margin="20, 5, 20, 5"
+                                    CornerRadius="10"
+                                    Padding="0"
+                                    MinimumHeightRequest="100">
+                                    
+                                    <Image 
+                                        Source="{Binding ImageUrl}"/>
+
                                 </Frame>
 
                             </VerticalStackLayout>
+                            
                         </Frame>
+                        
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
         </RefreshView>
 
         <Frame 
+            WidthRequest="90"
+            HeightRequest="90"
             Style="{StaticResource cards-button}"
-            Grid.Row="1">
-            
+            Grid.Row="1"
+            Margin="10"
+            HasShadow="True"
+            BackgroundColor="#464544"
+            Padding="0"
+            CornerRadius="100">
+
             <ImageButton
+                Margin="15, 15, 20, 15"
                 Source="cards.svg"
                 Command="{Binding GoToCardsPageCommand}">
 
                 <ImageButton.Behaviors>
-                    <toolkit:IconTintColorBehavior TintColor="{StaticResource BluePurple}"/>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource GhostlyWhite}"/>
                 </ImageButton.Behaviors>
-                
+
             </ImageButton>
 
         </Frame>
